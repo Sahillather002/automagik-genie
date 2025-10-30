@@ -1,5 +1,5 @@
 // @ts-ignore - forge.js is compiled JS without type declarations
-import { ForgeClient } from '../../../../forge.js';
+import { ForgeClient } from '../../../../src/lib/forge-client.js';
 import { execSync } from 'child_process';
 import { createHash } from 'crypto';
 import fs from 'fs';
@@ -60,7 +60,15 @@ export class ForgeExecutor {
 
       // If profiles provided, use them directly (bypass change detection)
       if (profiles) {
-        await this.forge.updateExecutorProfiles(profiles);
+        // Normalize: wrap in {executors: ...} if not already wrapped
+        const normalizedProfiles = 'executors' in profiles
+          ? profiles
+          : { executors: profiles };
+
+        // Clean null values (YAML null becomes JSON null, but Forge expects omitted fields)
+        const cleaned = this.cleanNullValues(normalizedProfiles);
+
+        await this.forge.updateExecutorProfiles(cleaned);
         return;
       }
 
@@ -133,9 +141,19 @@ export class ForgeExecutor {
 
       // Fetch current profiles to extract built-in variants
       const currentProfiles = await this.forge.getExecutorProfiles();
-      let accumulated = typeof currentProfiles.content === 'string'
-        ? JSON.parse(currentProfiles.content)
-        : currentProfiles;
+
+      // Forge wrapper already returns normalized { executors: {...} }
+      let accumulated: any = currentProfiles;
+
+      // Validate that profiles have executors field
+      if (!accumulated || typeof accumulated !== 'object') {
+        throw new Error('Invalid profiles structure: expected object with executors field');
+      }
+
+      if (!accumulated.executors) {
+        // Initialize empty executors if missing (first-time setup)
+        accumulated = { executors: {} };
+      }
 
       // Strategy: Sync ONE agent at a time (no batching complexity, guaranteed under 2MB)
       // Each request: built-ins (~200KB) + 1 agent (~65KB) = ~265KB per call
@@ -151,9 +169,8 @@ export class ForgeExecutor {
         try {
           // Get current Forge state (includes built-ins + previously synced agents)
           const currentProfiles = await this.forge.getExecutorProfiles();
-          const current = typeof currentProfiles.content === 'string'
-            ? JSON.parse(currentProfiles.content)
-            : currentProfiles;
+          // Forge wrapper already returns normalized { executors: {...} }
+          const current = currentProfiles;
 
           // Generate profile for THIS agent only
           const agentProfile = await registry.generateForgeProfiles(this.forge, [agent]);
@@ -272,7 +289,43 @@ export class ForgeExecutor {
    * @param agentProfile - Single agent profile to add/update
    * @returns Merged profiles
    */
+  private cleanNullValues(obj: any): any {
+    if (obj === null || obj === undefined) {
+      return undefined; // Will be omitted when stringified
+    }
+    if (Array.isArray(obj)) {
+      return obj.map(item => this.cleanNullValues(item)).filter(item => item !== undefined);
+    }
+    if (typeof obj === 'object') {
+      const cleaned: any = {};
+      for (const [key, value] of Object.entries(obj)) {
+        const cleanedValue = this.cleanNullValues(value);
+        if (cleanedValue !== undefined && cleanedValue !== null) {
+          cleaned[key] = cleanedValue;
+        }
+      }
+      return cleaned;
+    }
+    return obj;
+  }
+
   private mergeProfiles(current: any, agentProfile: any): any {
+    // Validate inputs
+    if (!current || typeof current !== 'object') {
+      throw new Error('mergeProfiles: current must be an object');
+    }
+    if (!agentProfile || typeof agentProfile !== 'object') {
+      throw new Error('mergeProfiles: agentProfile must be an object');
+    }
+
+    // Ensure executors field exists in both
+    if (!current.executors) {
+      current.executors = {};
+    }
+    if (!agentProfile.executors) {
+      throw new Error('mergeProfiles: agentProfile missing executors field');
+    }
+
     const merged: any = { executors: {} };
 
     // Get all executors from both current and agent profile
@@ -291,6 +344,11 @@ export class ForgeExecutor {
       // Add/update agent variant (overwrites if exists)
       const agentVariants = agentProfile.executors?.[executor] || {};
       Object.assign(merged.executors[executor], agentVariants);
+    }
+
+    // Final validation
+    if (!merged.executors || typeof merged.executors !== 'object') {
+      throw new Error('mergeProfiles: merged result missing executors field');
     }
 
     return merged;

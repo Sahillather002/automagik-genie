@@ -123,30 +123,14 @@ if (Test-CommandExists pnpm) {
     Write-Host "⚡ Installing pnpm (fast package manager)..." -ForegroundColor Magenta
     Write-Host ""
 
-    # Try corepack first (built into Node.js 16.9+)
+    # Use corepack (built into Node.js 16.9+) - most efficient method
     if (Test-CommandExists corepack) {
-        Write-Host "  Using corepack (built-in Node.js package manager)..."
-        corepack enable
-        corepack prepare pnpm@latest --activate
+        Write-Host "  Enabling pnpm via corepack (built-in)..."
+        corepack enable pnpm
     } else {
-        # Fallback: Install to user AppData (no admin required)
-        Write-Host "  Installing pnpm to user directory..."
-        $env:PNPM_HOME = "$env:LOCALAPPDATA\pnpm"
-        $env:Path = "$env:PNPM_HOME;$env:Path"
-
-        # Create pnpm directory
-        if (-not (Test-Path $env:PNPM_HOME)) {
-            New-Item -ItemType Directory -Path $env:PNPM_HOME -Force | Out-Null
-        }
-
-        # Install via npm
-        npm install -g pnpm --prefix="$env:PNPM_HOME"
-
-        # Add to PATH permanently
-        $userPath = [Environment]::GetEnvironmentVariable("Path", "User")
-        if ($userPath -notlike "*$env:PNPM_HOME*") {
-            [Environment]::SetEnvironmentVariable("Path", "$env:PNPM_HOME;$userPath", "User")
-        }
+        # Fallback: Use npm if corepack unavailable (older Node versions)
+        Write-Host "  Installing pnpm via npm (corepack not available)..."
+        npm install -g pnpm
     }
 
     # Verify installation

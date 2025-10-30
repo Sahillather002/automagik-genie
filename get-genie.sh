@@ -381,10 +381,17 @@ install_pnpm() {
 
     echo -e "${MAGENTA}⚡ Installing pnpm (fast package manager)...${NC}"
 
-    # Let npm handle pnpm installation (npm knows PATH)
-    npm install -g pnpm
+    # Use corepack (built into Node.js 16.9+) - most efficient method
+    if command_exists corepack; then
+        echo -e "${CYAN}🔧 Enabling pnpm via corepack (built-in)...${NC}"
+        corepack enable pnpm
+    else
+        # Fallback: Use npm if corepack unavailable (older Node versions)
+        echo -e "${CYAN}🔧 Installing pnpm via npm (corepack not available)...${NC}"
+        npm install -g pnpm
+    fi
 
-    # Verify it's immediately available
+    # Verify installation
     if ! command_exists pnpm; then
         echo -e "${YELLOW}⚠️  pnpm requires shell restart, will use npm fallback${NC}"
         echo ""

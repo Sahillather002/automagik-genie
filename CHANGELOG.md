@@ -8,6 +8,187 @@ All notable changes to this project will be documented in this file.
 
 ---
 
+## [2.5.6-rc.5] - 2025-10-30
+
+No changelog entries (packaging-only RC).
+
+## [2.5.6-rc.4] - 2025-10-30
+
+**README Improvements + Path utilities enhancement**
+
+### 📚 Documentation
+- Complete README rewrite with Genie voice and magic lamp narrative (#378)
+  - Reframed positioning from AI subscription trap to user empowerment
+  - Added market-agnostic architecture messaging
+  - Balanced tone for research lab positioning (acquisition-friendly)
+  - Progressive disclosure structure (hook → value → how → action)
+  - Emphasized data ownership and local-first architecture
+  - First-person Genie voice throughout
+
+### ✨ Improvements
+- Added comprehensive JSDoc and unit test coverage for CLI path utilities (#378)
+
+### 🔧 Technical
+- Optimized pnpm installation using corepack (#380)
+
+## [2.5.6-rc.3] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.6-rc.2] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.6-rc.1] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.98] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.97] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5] - 2025-10-29
+
+**MCP server fixes + release automation improvements**
+
+### 🐛 Bug Fixes
+- Fixed OAuth config loading in fresh workspaces (#375)
+- Fixed Forge executor detection broken due to incorrect paths (#376, #344)
+- Fixed MCP stdio keepalive regression (#370)
+- Fixed promote-to-stable workflow not updating package.json (#377)
+
+### ✨ Improvements
+- Added HTTP takeover prompt for port conflicts (#373)
+- Consolidated release workflows (#367, #366)
+- Clarified @latest vs @next installation docs
+- MCP transport fixes + build cleanup (#374)
+
+---
+
+## [2.5.5-rc.96] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.95] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.94] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.93] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.92] - 2025-10-29
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.91] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.90] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.89] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.88] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.87] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.86] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.85] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.84] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.83] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.82] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.81] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.80] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.79] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.78] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.77] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.76] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.75] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.74] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.73] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.72] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.71] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.70] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.69] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.68] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
+## [2.5.5-rc.67] - 2025-10-28
+
+No changelog entries (packaging-only RC).
+
 ## [2.5.5-rc.66] - 2025-10-27
 
 No changelog entries (packaging-only RC).
