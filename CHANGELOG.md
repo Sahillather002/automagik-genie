@@ -8,9 +8,93 @@ All notable changes to this project will be documented in this file.
 
 ---
 
-## [2.5.6-rc.5] - 2025-10-30
+## [2.5.9-rc.2] - 2025-10-31
 
 No changelog entries (packaging-only RC).
+
+## [2.5.9-rc.1] - 2025-10-31
+
+**MCP Neuron Tools: Project Detection & Worktree Support**
+
+### 🐛 Bug Fixes
+- Fixed MCP neuron tools hardcoded project IDs and branch names (#398)
+- Fixed P1: Prevent duplicate projects when running in Forge worktrees (#398)
+- Fixed forge-client.js API field name (follow_up_prompt → prompt)
+
+### ✨ Improvements
+- Automatic project detection by git repo path
+- Dynamic base branch detection (current branch, not hardcoded)
+- Correct neuron variant names (FORGE, WISH, REVIEW)
+- Worktree-aware project matching using git worktree list
+
+## [2.5.8-rc.2] - 2025-10-31
+
+No changelog entries (packaging-only RC).
+
+## [2.5.8-rc.1] - 2025-10-31
+
+No changelog entries (packaging-only RC).
+
+## [2.5.6-rc.8] - 2025-10-30
+
+No changelog entries (packaging-only RC).
+
+## [2.5.6-rc.7] - 2025-10-30
+
+**README Improvements + Path utilities enhancement**
+
+### 📚 Documentation
+- Complete README rewrite with Genie voice and magic lamp narrative (#378)
+  - Reframed positioning from AI subscription trap to user empowerment
+  - Added market-agnostic architecture messaging
+  - Balanced tone for research lab positioning (acquisition-friendly)
+  - Progressive disclosure structure (hook → value → how → action)
+  - Emphasized data ownership and local-first architecture
+  - First-person Genie voice throughout
+
+### ✨ Improvements
+- Added comprehensive JSDoc and unit test coverage for CLI path utilities (#378)
+
+### 🔧 Technical
+- Optimized pnpm installation using corepack (#380)
+
+## [2.5.6-rc.6] - 2025-10-30
+
+**README Improvements + Path utilities enhancement**
+
+### 📚 Documentation
+- Complete README rewrite with Genie voice and magic lamp narrative (#378)
+  - Reframed positioning from AI subscription trap to user empowerment
+  - Added market-agnostic architecture messaging
+  - Balanced tone for research lab positioning (acquisition-friendly)
+  - Progressive disclosure structure (hook → value → how → action)
+  - Emphasized data ownership and local-first architecture
+  - First-person Genie voice throughout
+
+### ✨ Improvements
+- Added comprehensive JSDoc and unit test coverage for CLI path utilities (#378)
+
+### 🔧 Technical
+- Optimized pnpm installation using corepack (#380)
+
+## [2.5.6-rc.5] - 2025-10-30
+
+**README Improvements + Path utilities enhancement**
+
+### 📚 Documentation
+- Complete README rewrite with Genie voice and magic lamp narrative (#378)
+  - Reframed positioning from AI subscription trap to user empowerment
+  - Added market-agnostic architecture messaging
+  - Balanced tone for research lab positioning (acquisition-friendly)
+  - Progressive disclosure structure (hook → value → how → action)
+  - Emphasized data ownership and local-first architecture
+  - First-person Genie voice throughout
+
+### ✨ Improvements
+- Added comprehensive JSDoc and unit test coverage for CLI path utilities (#378)
+
+### 🔧 Technical
+- Optimized pnpm installation using corepack (#380)
 
 ## [2.5.6-rc.4] - 2025-10-30
 
